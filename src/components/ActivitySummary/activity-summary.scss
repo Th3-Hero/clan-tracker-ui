@@ -1,21 +1,55 @@
+@import "../../theme";
 
-.table-container {
+.page-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     max-width: 100%;
     width: 100%;
+    overflow-x: hidden;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 95%;
     padding: 0;
     overflow-x: auto;
+    border: $orange 1px solid;
+}
+
+.table-row-header {
+    display: grid;
+    flex-direction: row;
+    justify-content: center;
+    grid-template-columns: repeat(10, 1fr);
+    width: 100%;
+    border-bottom: $orange 1px solid;
 }
 
 .table-row {
-    display: flex;
-    max-width: 100%;
+    display: grid;
     flex-direction: row;
+    justify-content: center;
+    grid-template-columns: repeat(10, 1fr);
+    width: 100%;
+}
+
+.table-row:nth-child(odd) {
+    background-color: $background-light;
+}
+
+.table-header-cell {
+    font-weight: bold;
 }
 
 .table-cell {
-    margin: 10px;
+    border-width: 0px 1px 0px 1px;
+    border-color: $orange;
+    border-style: solid;
+    padding: 5px;
 }

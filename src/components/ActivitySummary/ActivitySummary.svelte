@@ -27,37 +27,40 @@
 
 </script>
 
-<select bind:value={selectedClan}>
-    {#each clans as clan}
-        <option value={clan.id}>{clan.tag}</option>
-    {/each}
-</select>
+<div class="page-container">
+    <select bind:value={selectedClan}>
+        {#each clans as clan}
+            <option value={clan.id}>{clan.tag}</option>
+        {/each}
+    </select>
 
-<ul class="table-container">
-    <li class="table-row">
-        <div class="table-cell">Name</div>
-        <div class="table-cell">Rank</div>
-        <div class="table-cell">Joined Clan</div>
-        <div class="table-cell">Days in Clan</div>
-        <div class="table-cell">Last Battle</div>
-        <div class="table-cell">Randoms Diff</div>
-        <div class="table-cell">Skirmish Diff</div>
-        <div class="table-cell">Advances Diff</div>
-        <div class="table-cell">Clan War Diff</div>
-        <div class="table-cell">Total Clan Battles</div>
-    </li>
-    {#each activityInfo.memberActivity as memberActivity}
-        <li class="table-row">
-            <div class="table-cell">{memberActivity.name}</div>
-            <div class="table-cell">{rankDisplay(memberActivity)}</div>
-            <div class="table-cell">{dateTimeDisplay(memberActivity.joinedClan)}</div>
-            <div class="table-cell">{memberActivity.daysInClan}</div>
-            <div class="table-cell">{dateTimeDisplay(memberActivity.lastBattle)}</div>
-            <div class="table-cell">{memberActivity.randomsDiff}</div>
-            <div class="table-cell">{memberActivity.skirmishDiff}</div>
-            <div class="table-cell">{memberActivity.advancesDiff}</div>
-            <div class="table-cell">{memberActivity.clanWarDiff}</div>
-            <div class="table-cell">{totalClanBattles(memberActivity)}</div>
+    <ul class="table-container">
+        <li class="table-row-header">
+            <div class="table-cell table-header-cell">Name</div>
+            <div class="table-cell table-header-cell">Rank</div>
+            <div class="table-cell table-header-cell">Joined Clan</div>
+            <div class="table-cell table-header-cell">Days in Clan</div>
+            <div class="table-cell table-header-cell">Last Battle</div>
+            <div class="table-cell table-header-cell">Randoms Diff</div>
+            <div class="table-cell table-header-cell">Skirmish Diff</div>
+            <div class="table-cell table-header-cell">Advances Diff</div>
+            <div class="table-cell table-header-cell">Clan War Diff</div>
+            <div class="table-cell table-header-cell">Total Clan Battles</div>
         </li>
-    {/each}
-</ul>
+        {#each activityInfo.memberActivity as memberActivity}
+            <li class="table-row">
+                <div class="table-cell">{memberActivity.name}</div>
+                <div class="table-cell">{rankDisplay(memberActivity)}</div>
+                <div class="table-cell">{dateTimeDisplay(memberActivity.joinedClan)}</div>
+                <div class="table-cell">{memberActivity.daysInClan}</div>
+                <div class="table-cell">{dateTimeDisplay(memberActivity.lastBattle)}</div>
+                <div class="table-cell">{memberActivity.randomsDiff}</div>
+                <div class="table-cell">{memberActivity.skirmishDiff}</div>
+                <div class="table-cell">{memberActivity.advancesDiff}</div>
+                <div class="table-cell">{memberActivity.clanWarDiff}</div>
+                <div class="table-cell">{totalClanBattles(memberActivity)}</div>
+            </li>
+        {/each}
+    </ul>
+</div>
+
