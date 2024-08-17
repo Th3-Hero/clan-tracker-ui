@@ -1,5 +1,9 @@
 @import "../../theme";
 
+$activity-summary-performance-good: #42b861;
+$activity-summary-performance-poor: #de9d1b;
+$activity-summary-performance-bad: #de3b1b;
+
 .page-container {
     display: flex;
     flex-direction: column;
@@ -11,10 +15,8 @@
 }
 
 .table-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(10, auto);
     width: 100%;
     max-width: 95%;
     padding: 0;
@@ -22,34 +24,35 @@
     border: $orange 1px solid;
 }
 
-.table-row-header {
-    display: grid;
-    flex-direction: row;
-    justify-content: center;
-    grid-template-columns: repeat(10, 1fr);
-    width: 100%;
-    border-bottom: $orange 1px solid;
+.table-row-header, .table-row{
+    display: contents;
+    //border-bottom: $orange 1px solid;
 }
 
-.table-row {
-    display: grid;
-    flex-direction: row;
-    justify-content: center;
-    grid-template-columns: repeat(10, 1fr);
-    width: 100%;
-}
-
-.table-row:nth-child(odd) {
-    background-color: $background-light;
-}
-
-.table-header-cell {
+.table-row-header .table-cell  {
     font-weight: bold;
+    border-bottom: $orange 2px solid;
 }
 
-.table-cell {
-    border-width: 0px 1px 0px 1px;
+.table-header-cell, .table-cell {
+    padding: 5px;
+    border-width: 0 1px 0 1px;
     border-color: $orange;
     border-style: solid;
-    padding: 5px;
+}
+
+//.table-row:nth-child(even) * {
+//    background-color: $background-light;
+//}
+
+.performance-good * {
+    background-color: $activity-summary-performance-good;
+}
+
+.performance-poor * {
+    background-color: $activity-summary-performance-poor;
+}
+
+.performance-bad * {
+    background-color: $activity-summary-performance-bad;
 }
