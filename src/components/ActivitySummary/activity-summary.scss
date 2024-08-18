@@ -1,8 +1,11 @@
 @import "../../theme";
 
-$activity-summary-performance-good: #42b861;
-$activity-summary-performance-poor: #de9d1b;
-$activity-summary-performance-bad: #de3b1b;
+$activity-summary-performance-good: hsl(132, 56%, 34%);
+$activity-summary-performance-good-alt: hsl(132, 56%, 40%);
+$activity-summary-performance-poor: hsl(40, 78%, 49%);
+$activity-summary-performance-poor-alt: hsl(40, 78%, 44%);
+$activity-summary-performance-bad: hsl(10, 62%, 44%);
+$activity-summary-performance-bad-alt: hsl(10, 62%, 50%);
 
 .page-container {
     display: flex;
@@ -14,11 +17,29 @@ $activity-summary-performance-bad: #de3b1b;
     overflow-x: hidden;
 }
 
-.controls {
+select, option {
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 50px;
+    text-align: center;
+}
+
+.controls-container {
     display: flex;
     flex-direction: row;
-    margin-left: 20px;
-    margin-right: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.control {
+    margin: 0 10px 0 10px;
+}
+
+.performance-controls {
+    display: flex;
+    flex-direction: row;
 }
 
 .table-container {
@@ -28,34 +49,37 @@ $activity-summary-performance-bad: #de3b1b;
     max-width: 95%;
     padding: 0;
     overflow-x: auto;
-    border: $orange 1px solid;
+    border: $font 1px solid;
 }
 
 .table-row-header, .table-row{
     display: contents;
-    //border-bottom: $orange 1px solid;
 }
 
 .table-row-header .table-cell  {
     font-weight: bold;
-    border-bottom: $orange 2px solid;
+    border-bottom: $font 2px solid;
 }
 
 .table-header-cell, .table-cell {
     padding: 5px;
     border-width: 0 1px 0 1px;
-    border-color: $orange;
+    border-color: $font;
     border-style: solid;
 }
 
-//.table-row:nth-child(even) * {
-//    background-color: $background-light;
-//}
-
-.performance-controls {
+.table-header-cell {
     display: flex;
-    flex-direction: row;
-    margin: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px 10px 10px;
+    position: relative;
+}
+
+.sort-arrow {
+    position: absolute;
+    right: 10px;
 }
 
 .performance-good * {
@@ -68,4 +92,16 @@ $activity-summary-performance-bad: #de3b1b;
 
 .performance-bad * {
     background-color: $activity-summary-performance-bad;
+}
+
+.performance-good:nth-child(even) * {
+    background-color: $activity-summary-performance-good-alt;
+}
+
+.performance-poor:nth-child(even) * {
+    background-color: $activity-summary-performance-poor-alt;
+}
+
+.performance-bad:nth-child(even) * {
+    background-color: $activity-summary-performance-bad-alt;
 }

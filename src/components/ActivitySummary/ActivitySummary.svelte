@@ -113,43 +113,49 @@
 </script>
 
 <div class="page-container">
-    <div class="controls">
-        <select bind:value={selectedClan}>
-            <option disabled>Select Clan:</option>
-            {#each clans as clan}
-                <option value={clan.id}>{clan.tag}</option>
-            {/each}
-        </select>
+    <div class="controls-container">
+        <div class="control">
+            <div>Select Clan</div>
+            <select bind:value={selectedClan}>
+                <option disabled>Select Clan:</option>
+                {#each clans as clan}
+                    <option value={clan.id}>{clan.tag}</option>
+                {/each}
+            </select>
+        </div>
 
         <div class="performance-controls">
-            <div>
+            <div class="control">
                 <div>Good</div>
-                <input type="number" bind:value={pageConfig.good} placeholder="Good"/>
+                <input type="text" bind:value={pageConfig.good} placeholder="Good"/>
             </div>
-            <div>
+            <div class="control">
                 <div>Poor</div>
-                <input type="number" bind:value={pageConfig.poor} placeholder="Poor"/>
+                <input type="text" bind:value={pageConfig.poor} placeholder="Poor"/>
             </div>
-            <div>
+            <div class="control">
                 <div>Bad</div>
-                <input type="number" bind:value={pageConfig.bad} placeholder="Bad"/>
+                <input type="text" bind:value={pageConfig.bad} placeholder="Bad"/>
             </div>
         </div>
 
-        <select bind:value={colorBy}>
-            <option disabled>Color By:</option>
-            <option value="randoms">Randoms</option>
-            <option value="skirmish">Skirmish</option>
-            <option value="advances">Advances</option>
-            <option value="clan_war">Clan War</option>
-            <option value="total_clan_battles" selected>Total Clan Battles</option>
-        </select>
+        <div class="control">
+            <div>Color By</div>
+            <select bind:value={colorBy}>
+                <option disabled>Color By:</option>
+                <option value="randoms">Randoms</option>
+                <option value="skirmish">Skirmish</option>
+                <option value="advances">Advances</option>
+                <option value="clan_war">Clan War</option>
+                <option value="total_clan_battles" selected>Total Clan Battles</option>
+            </select>
+        </div>
 
-        <div>
+        <div class="control">
             <div>Start Date</div>
             <input type="date" bind:value={pageConfig.startDate} on:change={onDateChange} />
         </div>
-        <div>
+        <div class="control">
             <div>End Date</div>
             <input type="date" bind:value={pageConfig.endDate} on:change={onDateChange} />
         </div>
@@ -163,9 +169,9 @@
                 Name
                 {#if sortColumn === SortType.NAME}
                     {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
                     {:else}
-                        <span class="material-symbols-outlined">keyboard_arrow_up</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
                     {/if}
                 {/if}
             </button>
@@ -173,9 +179,9 @@
                 Rank
                 {#if sortColumn === SortType.RANK}
                     {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined">keyboard_arrow_up</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
                     {:else}
-                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
                     {/if}
                 {/if}
             </button>
@@ -183,9 +189,9 @@
                 Joined Clan
                 {#if sortColumn === SortType.JOINED}
                     {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined">keyboard_arrow_up</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
                     {:else}
-                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
                     {/if}
                 {/if}
             </button>
@@ -194,9 +200,9 @@
                 Days in Clan
                 {#if sortColumn === SortType.DAYS_IN_CLAN}
                     {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined">keyboard_arrow_up</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
                     {:else}
-                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
                     {/if}
                 {/if}
             </button>
@@ -205,9 +211,9 @@
                 Last Battle
                 {#if sortColumn === SortType.LAST_BATTLE}
                     {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined">keyboard_arrow_up</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
                     {:else}
-                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
                     {/if}
                 {/if}
             </button>
@@ -216,9 +222,9 @@
                 Randoms
                 {#if sortColumn === SortType.RANDOMS}
                     {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined">keyboard_arrow_up</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
                     {:else}
-                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
                     {/if}
                 {/if}
             </button>
@@ -227,9 +233,9 @@
                 Skirmish
                 {#if sortColumn === SortType.SKIRMISH}
                     {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined">keyboard_arrow_up</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
                     {:else}
-                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
                     {/if}
                 {/if}
             </button>
@@ -238,9 +244,9 @@
                 Advances
                 {#if sortColumn === SortType.ADVANCES}
                     {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined">keyboard_arrow_up</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
                     {:else}
-                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
                     {/if}
                 {/if}
             </button>
@@ -249,9 +255,9 @@
                 Clan War
                 {#if sortColumn === SortType.CLAN_WARS}
                     {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined">keyboard_arrow_up</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
                     {:else}
-                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
                     {/if}
                 {/if}
             </button>
@@ -260,9 +266,9 @@
                 Total Clan Battles
                 {#if sortColumn === SortType.TOTAL_CLAN_BATTLES}
                     {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined">keyboard_arrow_up</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
                     {:else}
-                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
                     {/if}
                 {/if}
             </button>
