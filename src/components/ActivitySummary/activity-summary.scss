@@ -14,6 +14,13 @@ $activity-summary-performance-bad: #de3b1b;
     overflow-x: hidden;
 }
 
+.controls {
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 .table-container {
     display: grid;
     grid-template-columns: repeat(10, auto);
@@ -44,6 +51,12 @@ $activity-summary-performance-bad: #de3b1b;
 //.table-row:nth-child(even) * {
 //    background-color: $background-light;
 //}
+
+.performance-controls {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
 
 .performance-good * {
     background-color: $activity-summary-performance-good;

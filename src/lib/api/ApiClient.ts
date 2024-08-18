@@ -1,6 +1,7 @@
 
 import { CONFIG } from "../../config";
 import type { ActivityInfo, Clan, Config } from "./clan-tracker-dtos";
+import { dateToApiDate } from "../DisplayLib";
 
 const API_URL = CONFIG.SERVER_URL;
 
@@ -23,8 +24,8 @@ export class ApiClient {
 
     async getClanActivity(clanId: number, startDate: Date | null, endDate: Date | null): Promise<ActivityInfo> {
         let requestUrl = `${API_URL}/data/clan-activity/${clanId}`;
-        if (startDate !== null || endDate !== null) {
-            requestUrl += `&startDate=${startDate?.toISOString()}&endDate=${endDate?.toISOString()}`;
+        if (startDate !== null && endDate !== null) {
+            requestUrl += `?&startDate=${dateToApiDate(startDate)}&endDate=${dateToApiDate(endDate)}`;
         }
         const response = await fetch(requestUrl);
         if (!response.ok) {
