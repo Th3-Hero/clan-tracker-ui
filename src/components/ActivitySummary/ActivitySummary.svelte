@@ -162,132 +162,154 @@
     </div>
 
 
-    <ul class="table-container">
-        <li class="table-row-header">
-            <button type="button" value={SortType.NAME} class="table-cell table-header-cell"
-                    on:click={() => sortActivities(SortType.NAME)}>
-                Name
-                {#if sortColumn === SortType.NAME}
-                    {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
-                    {:else}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
+    <table class="table-container">
+        <tr class="table-header">
+            <th class="table-row-header">
+                <button type="button" value={SortType.NAME} class="table-cell table-header-cell"
+                        on:click={() => sortActivities(SortType.NAME)}>
+                    Name
+                    {#if sortColumn === SortType.NAME}
+                        {#if sortOrder === SortOrder.ASCENDING}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                        {:else}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
+                        {/if}
                     {/if}
-                {/if}
-            </button>
-            <button type="button" class="table-cell table-header-cell" on:click={() => sortActivities(SortType.RANK)}>
-                Rank
-                {#if sortColumn === SortType.RANK}
-                    {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
-                    {:else}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                </button>
+            </th>
+            <th class="table-row-header">
+                <button type="button" class="table-cell table-header-cell" on:click={() => sortActivities(SortType.RANK)}>
+                    Rank
+                    {#if sortColumn === SortType.RANK}
+                        {#if sortOrder === SortOrder.ASCENDING}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
+                        {:else}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                        {/if}
                     {/if}
-                {/if}
-            </button>
-            <button type="button" class="table-cell table-header-cell" on:click={() => sortActivities(SortType.JOINED)}>
-                Joined Clan
-                {#if sortColumn === SortType.JOINED}
-                    {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
-                    {:else}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                </button>
+            </th>
+            <th class="table-row-header">
+                <button type="button" class="table-cell table-header-cell" on:click={() => sortActivities(SortType.JOINED)}>
+                    Joined Clan
+                    {#if sortColumn === SortType.JOINED}
+                        {#if sortOrder === SortOrder.ASCENDING}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
+                        {:else}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                        {/if}
                     {/if}
-                {/if}
-            </button>
-            <button type="button" class="table-cell table-header-cell"
-                    on:click={() => sortActivities(SortType.DAYS_IN_CLAN)}>
-                Days in Clan
-                {#if sortColumn === SortType.DAYS_IN_CLAN}
-                    {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
-                    {:else}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                </button>
+            </th>
+            <th class="table-row-header">
+                <button type="button" class="table-cell table-header-cell"
+                        on:click={() => sortActivities(SortType.DAYS_IN_CLAN)}>
+                    Days in Clan
+                    {#if sortColumn === SortType.DAYS_IN_CLAN}
+                        {#if sortOrder === SortOrder.ASCENDING}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
+                        {:else}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                        {/if}
                     {/if}
-                {/if}
-            </button>
-            <button type="button" class="table-cell table-header-cell"
-                    on:click={() => sortActivities(SortType.LAST_BATTLE)}>
-                Last Battle
-                {#if sortColumn === SortType.LAST_BATTLE}
-                    {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
-                    {:else}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                </button>
+            </th>
+            <th class="table-row-header">
+                <button type="button" class="table-cell table-header-cell"
+                        on:click={() => sortActivities(SortType.LAST_BATTLE)}>
+                    Last Battle
+                    {#if sortColumn === SortType.LAST_BATTLE}
+                        {#if sortOrder === SortOrder.ASCENDING}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
+                        {:else}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                        {/if}
                     {/if}
-                {/if}
-            </button>
-            <button type="button" class="table-cell table-header-cell"
-                    on:click={() => sortActivities(SortType.RANDOMS)}>
-                Randoms
-                {#if sortColumn === SortType.RANDOMS}
-                    {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
-                    {:else}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                </button>
+            </th>
+            <th class="table-row-header">
+                <button type="button" class="table-cell table-header-cell"
+                        on:click={() => sortActivities(SortType.RANDOMS)}>
+                    Randoms
+                    {#if sortColumn === SortType.RANDOMS}
+                        {#if sortOrder === SortOrder.ASCENDING}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
+                        {:else}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                        {/if}
                     {/if}
-                {/if}
-            </button>
-            <button type="button" class="table-cell table-header-cell"
-                    on:click={() => sortActivities(SortType.SKIRMISH)}>
-                Skirmish
-                {#if sortColumn === SortType.SKIRMISH}
-                    {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
-                    {:else}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                </button>
+            </th>
+            <th class="table-row-header">
+                <button type="button" class="table-cell table-header-cell"
+                        on:click={() => sortActivities(SortType.SKIRMISH)}>
+                    Skirmish
+                    {#if sortColumn === SortType.SKIRMISH}
+                        {#if sortOrder === SortOrder.ASCENDING}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
+                        {:else}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                        {/if}
                     {/if}
-                {/if}
-            </button>
-            <button type="button" class="table-cell table-header-cell"
-                    on:click={() => sortActivities(SortType.ADVANCES)}>
-                Advances
-                {#if sortColumn === SortType.ADVANCES}
-                    {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
-                    {:else}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                </button>
+            </th>
+            <th class="table-row-header">
+                <button type="button" class="table-cell table-header-cell"
+                        on:click={() => sortActivities(SortType.ADVANCES)}>
+                    Advances
+                    {#if sortColumn === SortType.ADVANCES}
+                        {#if sortOrder === SortOrder.ASCENDING}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
+                        {:else}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                        {/if}
                     {/if}
-                {/if}
-            </button>
-            <button type="button" class="table-cell table-header-cell"
-                    on:click={() => sortActivities(SortType.CLAN_WARS)}>
-                Clan War
-                {#if sortColumn === SortType.CLAN_WARS}
-                    {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
-                    {:else}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                </button>
+            </th>
+            <th class="table-row-header">
+                <button type="button" class="table-cell table-header-cell"
+                        on:click={() => sortActivities(SortType.CLAN_WARS)}>
+                    Clan War
+                    {#if sortColumn === SortType.CLAN_WARS}
+                        {#if sortOrder === SortOrder.ASCENDING}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
+                        {:else}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                        {/if}
                     {/if}
-                {/if}
-            </button>
-            <button type="button" class="table-cell table-header-cell"
-                    on:click={() => sortActivities(SortType.TOTAL_CLAN_BATTLES)}>
-                Total Clan Battles
-                {#if sortColumn === SortType.TOTAL_CLAN_BATTLES}
-                    {#if sortOrder === SortOrder.ASCENDING}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
-                    {:else}
-                        <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                </button>
+            </th>
+            <th class="table-row-header">
+                <button type="button" class="table-cell table-header-cell"
+                        on:click={() => sortActivities(SortType.TOTAL_CLAN_BATTLES)}>
+                    Total Clan Battles
+                    {#if sortColumn === SortType.TOTAL_CLAN_BATTLES}
+                        {#if sortOrder === SortOrder.ASCENDING}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_up</span>
+                        {:else}
+                            <span class="material-symbols-outlined sort-arrow">keyboard_arrow_down</span>
+                        {/if}
                     {/if}
-                {/if}
-            </button>
-        </li>
+                </button>
+            </th>
+        </tr>
+
         {#each activityInfo.memberActivity as memberActivity}
-            <li class={`table-row ${getPerformanceClass(memberActivity)}`}>
-                <div class="table-cell">{memberActivity.name}</div>
-                <div class="table-cell">{rankDisplay(memberActivity)}</div>
-                <div class="table-cell">{dateTimeDisplay(memberActivity.joinedClan)}</div>
-                <div class="table-cell">{memberActivity.daysInClan}</div>
-                <div class="table-cell">{dateTimeDisplay(memberActivity.lastBattle)}</div>
-                <div class="table-cell">{memberActivity.randomsDiff}</div>
-                <div class="table-cell">{memberActivity.skirmishDiff}</div>
-                <div class="table-cell">{memberActivity.advancesDiff}</div>
-                <div class="table-cell">{memberActivity.clanWarDiff}</div>
-                <div class="table-cell">{totalClanBattles(memberActivity)}</div>
-            </li>
+            <tr class={getPerformanceClass(memberActivity)}>
+                <td class="table-cell">{memberActivity.name}</td>
+                <td class="table-cell">{rankDisplay(memberActivity)}</td>
+                <td class="table-cell">{dateTimeDisplay(memberActivity.joinedClan)}</td>
+                <td class="table-cell">{memberActivity.daysInClan}</td>
+                <td class="table-cell">{dateTimeDisplay(memberActivity.lastBattle)}</td>
+                <td class="table-cell">{memberActivity.randomsDiff}</td>
+                <td class="table-cell">{memberActivity.skirmishDiff}</td>
+                <td class="table-cell">{memberActivity.advancesDiff}</td>
+                <td class="table-cell">{memberActivity.clanWarDiff}</td>
+                <td class="table-cell">{totalClanBattles(memberActivity)}</td>
+            </tr>
         {/each}
-    </ul>
+    </table>
+
 </div>
 
 <link rel="stylesheet"
