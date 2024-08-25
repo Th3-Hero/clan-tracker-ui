@@ -16,13 +16,34 @@ $activity-summary-performance-bad-alt: hsl(10, 62%, 50%);
     width: 100%;
 }
 
+.top-bar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    z-index: 998;
+    padding-bottom: 16px;
+    background-color: $background-dark;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
 .title {
     font-size: 32px;
     font-weight: bold;
-    position: absolute;
+    position: relative;
+    margin-right: 50px;
     left: 25px;
     top: 5px;
-    z-index: 999;
+}
+
+.controls-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 75%;
 }
 
 select, option {
@@ -32,19 +53,6 @@ select, option {
 input[type="text"] {
     width: 50px;
     text-align: center;
-}
-
-.controls-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 998;
-    padding-bottom: 16px;
-    background-color: $background-dark;
 }
 
 .control {

@@ -4,10 +4,9 @@
     import { onMount } from "svelte";
     import type { ActivityInfo, Clan, Config, MemberActivity } from "../../lib/api/clan-tracker-dtos";
     import {
-        dateDisplay,
         dateDisplayToDate,
-        dateTimeDisplay,
         daysBetween,
+        formatDate,
         rankDisplay,
         sortMemberActivity,
         SortOrder,
@@ -110,8 +109,8 @@
             good: config.defaultPerformanceThresholdGood,
             poor: config.defaultPerformanceThresholdPoor,
             bad: config.defaultPerformanceThresholdBad,
-            startDate: dateDisplay(activityInfo.startDate),
-            endDate: dateDisplay(activityInfo.endDate)
+            startDate: formatDate(activityInfo.startDate),
+            endDate: formatDate(activityInfo.endDate)
         }
         sortActivities(SortType.TOTAL_CLAN_BATTLES);
     });
@@ -125,60 +124,63 @@
 
 <div class="page-container">
     <!-- When this changes to multi page site move the header to the navbar.-->
-    <div class="title">Activity Summary</div>
-    <div class="controls-container">
-        <div class="control">
-            <div>Select Clan</div>
-            <select bind:value={selectedClan} on:change={onClanChange}>
-                <option disabled>Select Clan:</option>
-                {#each clans as clan}
-                    <option value={clan.id}>{clan.tag}</option>
-                {/each}
-            </select>
-        </div>
+    <div class="top-bar">
+        <div class="title">Activity Summary</div>
 
-        <div class="performance-controls">
+        <div class="controls-container">
             <div class="control">
-                <div>Good</div>
-                <input type="text" bind:value={pageConfig.good} placeholder="Good"/>
+                <div>Select Clan</div>
+                <select bind:value={selectedClan} on:change={onClanChange}>
+                    <option disabled>Select Clan:</option>
+                    {#each clans as clan}
+                        <option value={clan.id}>{clan.tag}</option>
+                    {/each}
+                </select>
+            </div>
+
+            <div class="performance-controls">
+                <div class="control">
+                    <div>Good</div>
+                    <input type="text" bind:value={pageConfig.good} placeholder="Good"/>
+                </div>
+                <div class="control">
+                    <div>Poor</div>
+                    <input type="text" bind:value={pageConfig.poor} placeholder="Poor"/>
+                </div>
+                <div class="control">
+                    <div>Bad</div>
+                    <input type="text" bind:value={pageConfig.bad} placeholder="Bad"/>
+                </div>
+            </div>
+
+            <div class="control">
+                <div>Color By</div>
+                <select bind:value={colorBy}>
+                    <option disabled>Color By:</option>
+                    <option value="randoms">Randoms</option>
+                    <option value="skirmish">Skirmish</option>
+                    <option value="advances">Advances</option>
+                    <option value="clan_war">Clan War</option>
+                    <option value="total_clan_battles" selected>Total Clan Battles</option>
+                </select>
+            </div>
+
+            <div class="control">
+                <div>Start Date</div>
+                <input type="date" bind:value={pageConfig.startDate} on:change={onDateChange}/>
             </div>
             <div class="control">
-                <div>Poor</div>
-                <input type="text" bind:value={pageConfig.poor} placeholder="Poor"/>
+                <div>End Date</div>
+                <input type="date" bind:value={pageConfig.endDate} on:change={onDateChange}/>
             </div>
             <div class="control">
-                <div>Bad</div>
-                <input type="text" bind:value={pageConfig.bad} placeholder="Bad"/>
+                <div>Date Range</div>
+                <div>{daysBetween(activityInfo.startDate, activityInfo.endDate)} days</div>
             </div>
-        </div>
-
-        <div class="control">
-            <div>Color By</div>
-            <select bind:value={colorBy}>
-                <option disabled>Color By:</option>
-                <option value="randoms">Randoms</option>
-                <option value="skirmish">Skirmish</option>
-                <option value="advances">Advances</option>
-                <option value="clan_war">Clan War</option>
-                <option value="total_clan_battles" selected>Total Clan Battles</option>
-            </select>
-        </div>
-
-        <div class="control">
-            <div>Start Date</div>
-            <input type="date" bind:value={pageConfig.startDate} on:change={onDateChange}/>
-        </div>
-        <div class="control">
-            <div>End Date</div>
-            <input type="date" bind:value={pageConfig.endDate} on:change={onDateChange}/>
-        </div>
-        <div class="control">
-            <div>Date Range</div>
-            <div>{daysBetween(activityInfo.startDate, activityInfo.endDate)} days</div>
-        </div>
-        <div class="control">
-            <div>Members</div>
-            <div>{activityInfo.memberActivity.length}</div>
+            <div class="control">
+                <div>Members</div>
+                <div>{activityInfo.memberActivity.length}</div>
+            </div>
         </div>
     </div>
 
@@ -321,9 +323,9 @@
             <tr class={getPerformanceClass(memberActivity)}>
                 <td class="table-cell">{memberActivity.name}</td>
                 <td class="table-cell">{rankDisplay(memberActivity)}</td>
-                <td class="table-cell">{dateTimeDisplay(memberActivity.joinedClan)}</td>
+                <td class="table-cell">{formatDate(memberActivity.joinedClan)}</td>
                 <td class="table-cell">{memberActivity.daysInClan}</td>
-                <td class="table-cell">{dateTimeDisplay(memberActivity.lastBattle)}</td>
+                <td class="table-cell">{formatDate(memberActivity.lastBattle)}</td>
                 <td class="table-cell">{memberActivity.randomsDiff}</td>
                 <td class="table-cell">{memberActivity.skirmishDiff}</td>
                 <td class="table-cell">{memberActivity.advancesDiff}</td>
