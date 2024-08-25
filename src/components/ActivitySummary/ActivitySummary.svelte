@@ -4,8 +4,10 @@
     import { onMount } from "svelte";
     import type { ActivityInfo, Clan, Config, MemberActivity } from "../../lib/api/clan-tracker-dtos";
     import {
-        dateDisplay, dateDisplayToDate,
+        dateDisplay,
+        dateDisplayToDate,
         dateTimeDisplay,
+        daysBetween,
         rankDisplay,
         sortMemberActivity,
         SortOrder,
@@ -77,11 +79,20 @@
         activityInfo.memberActivity = sortMemberActivity(sortOrder, sortColumn, activityInfo.memberActivity);
     }
 
+    const onClanChange = async () => {
+        const apiClient = new ApiClient();
+        const startDate = dateDisplayToDate(pageConfig.startDate);
+        const endDate = dateDisplayToDate(pageConfig.endDate);
+        activityInfo = await apiClient.getClanActivity(selectedClan, startDate, endDate);
+        activityInfo.memberActivity = sortMemberActivity(sortOrder, sortColumn, activityInfo.memberActivity);
+    };
+
     const onDateChange = async () => {
         const apiClient = new ApiClient();
         const startDate = dateDisplayToDate(pageConfig.startDate);
         const endDate = dateDisplayToDate(pageConfig.endDate);
         activityInfo = await apiClient.getClanActivity(selectedClan, startDate, endDate);
+        activityInfo.memberActivity = sortMemberActivity(sortOrder, sortColumn, activityInfo.memberActivity);
     };
 
     onMount(async () => {
@@ -113,10 +124,12 @@
 </script>
 
 <div class="page-container">
+    <!-- When this changes to multi page site move the header to the navbar.-->
+    <div class="title">Activity Summary</div>
     <div class="controls-container">
         <div class="control">
             <div>Select Clan</div>
-            <select bind:value={selectedClan}>
+            <select bind:value={selectedClan} on:change={onClanChange}>
                 <option disabled>Select Clan:</option>
                 {#each clans as clan}
                     <option value={clan.id}>{clan.tag}</option>
@@ -153,11 +166,19 @@
 
         <div class="control">
             <div>Start Date</div>
-            <input type="date" bind:value={pageConfig.startDate} on:change={onDateChange} />
+            <input type="date" bind:value={pageConfig.startDate} on:change={onDateChange}/>
         </div>
         <div class="control">
             <div>End Date</div>
-            <input type="date" bind:value={pageConfig.endDate} on:change={onDateChange} />
+            <input type="date" bind:value={pageConfig.endDate} on:change={onDateChange}/>
+        </div>
+        <div class="control">
+            <div>Date Range</div>
+            <div>{daysBetween(activityInfo.startDate, activityInfo.endDate)} days</div>
+        </div>
+        <div class="control">
+            <div>Members</div>
+            <div>{activityInfo.memberActivity.length}</div>
         </div>
     </div>
 
@@ -178,7 +199,8 @@
                 </button>
             </th>
             <th class="table-row-header">
-                <button type="button" class="table-cell table-header-cell" on:click={() => sortActivities(SortType.RANK)}>
+                <button type="button" class="table-cell table-header-cell"
+                        on:click={() => sortActivities(SortType.RANK)}>
                     Rank
                     {#if sortColumn === SortType.RANK}
                         {#if sortOrder === SortOrder.ASCENDING}
@@ -190,7 +212,8 @@
                 </button>
             </th>
             <th class="table-row-header">
-                <button type="button" class="table-cell table-header-cell" on:click={() => sortActivities(SortType.JOINED)}>
+                <button type="button" class="table-cell table-header-cell"
+                        on:click={() => sortActivities(SortType.JOINED)}>
                     Joined Clan
                     {#if sortColumn === SortType.JOINED}
                         {#if sortOrder === SortOrder.ASCENDING}

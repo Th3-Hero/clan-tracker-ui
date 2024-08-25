@@ -9,6 +9,14 @@ export const rankDisplay = (activity: MemberActivity): string => {
     return titleCase(activity.rank.toLowerCase().replace("_", " "));
 };
 
+export const daysBetween = (date1: Date, date2: Date): number => {
+    if (date1 === null || date2 === null) {
+        return 0;
+    }
+    const oneDay = 24 * 60 * 60 * 1000;
+    return Math.round(Math.abs((date1.getTime() - date2.getTime()) / oneDay));
+}
+
 export const dateDisplayToDate = (date: string): Date => {
     const [year, month, day] = date.split("-").map(Number);
     return new Date(year, month - 1, day);
