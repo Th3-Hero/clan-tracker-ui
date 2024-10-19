@@ -1,6 +1,6 @@
 
 import { CONFIG } from "../../config";
-import type { ActivityInfo, Clan, Config } from "./clan-tracker-dtos";
+import type { ActivityInfo, Clan, Config, PlayerInfo } from "./clan-tracker-dtos";
 import { dateToApiDate } from "../DisplayLib";
 
 const API_URL = CONFIG.SERVER_URL;
@@ -42,6 +42,22 @@ export class ApiClient {
         });
 
         return activityInfo;
+    }
+
+    async getPlayerInfo(playerIdOrName: string, startDate: Date, endDate: Date): Promise<PlayerInfo> {
+        let requestUrl = `${API_URL}/data/player-activity/${playerIdOrName}?&startDate=${dateToApiDate(startDate)}&endDate=${dateToApiDate(endDate)}`;
+
+        const response = await fetch(requestUrl);
+        if (!response.ok) {
+            throw new FetchError("Failed to fetch player activity", response);
+        }
+        const playerInfo = await response.json() as PlayerInfo;
+
+        // Parse date strings to Date objects
+        playerInfo.startDate = new Date(playerInfo.startDate);
+        playerInfo.endDate = new Date(playerInfo.endDate);
+
+        return playerInfo;
     }
 }
 

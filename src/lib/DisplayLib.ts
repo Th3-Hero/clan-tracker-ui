@@ -30,9 +30,9 @@ export const formatDate = (date: Date, includeTime: boolean = false): string => 
     const minutes = String(date.getMinutes()).padStart(2, '0');
 
     if (includeTime) {
-        return `${year}-${month}-${day} ${hours}:${minutes}`;
+        return `${ year }-${ month }-${ day } ${ hours }:${ minutes }`;
     }
-    return `${year}-${month}-${day}`;
+    return `${ year }-${ month }-${ day }`;
 };
 
 export const dateToApiDate = (date: Date): string => {
@@ -44,6 +44,7 @@ export enum SortOrder {
     ASCENDING,
     DESCENDING
 }
+
 export enum SortType {
     "NAME",
     "RANK",
@@ -56,6 +57,7 @@ export enum SortType {
     "CLAN_WARS",
     "TOTAL_CLAN_BATTLES"
 }
+
 const rankOrder = [
     "COMMANDER",
     "EXECUTIVE_OFFICER",

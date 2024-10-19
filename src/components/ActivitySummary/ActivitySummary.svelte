@@ -1,5 +1,6 @@
 <script lang="ts">
     import "./activity-summary.scss";
+    import "../shared.scss";
     import { ApiClient } from "../../lib/api/ApiClient";
     import { onMount } from "svelte";
     import type { ActivityInfo, Clan, Config, MemberActivity } from "../../lib/api/clan-tracker-dtos";

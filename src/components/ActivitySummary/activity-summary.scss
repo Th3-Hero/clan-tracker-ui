@@ -7,45 +7,6 @@ $activity-summary-performance-poor-alt: hsl(40, 78%, 44%);
 $activity-summary-performance-bad: hsl(10, 62%, 44%);
 $activity-summary-performance-bad-alt: hsl(10, 62%, 50%);
 
-.page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-    width: 100%;
-}
-
-.top-bar {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    z-index: 998;
-    padding-bottom: 16px;
-    background-color: $background-dark;
-    align-items: center;
-    position: sticky;
-    top: 0;
-}
-
-.title {
-    font-size: 32px;
-    font-weight: bold;
-    position: relative;
-    margin-right: 50px;
-    left: 25px;
-    top: 5px;
-}
-
-.controls-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 75%;
-}
-
 select, option {
     text-align: center;
 }
@@ -53,10 +14,6 @@ select, option {
 input[type="text"] {
     width: 50px;
     text-align: center;
-}
-
-.control {
-    margin: 0 10px 0 10px;
 }
 
 .performance-controls {
