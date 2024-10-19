@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2024-09-21 19:47:56.
+// Generated using typescript-generator version 3.2.1263 on 2024-10-19 12:20:07.
 
 /**
  * Information about the activity of a clan.
@@ -123,14 +123,6 @@ export interface PlayerInfo {
      */
     name: string;
     /**
-     * Starting date of the activity period.
-     */
-    startDate: Date;
-    /**
-     * Ending date of the activity period.
-     */
-    endDate: Date;
-    /**
      * How many random battles the member has played within the time period.
      */
     randomsDiff: number;
@@ -146,6 +138,24 @@ export interface PlayerInfo {
      * How many clan wars battles the member has played within the time period.
      */
     clanWarDiff: number;
+}
+
+/**
+ * Information about the activity of players matching the search criteria during a specific period.
+ */
+export interface PlayerSearch {
+    /**
+     * Starting date of the activity period.
+     */
+    startDate: Date;
+    /**
+     * Ending date of the activity period.
+     */
+    endDate: Date;
+    /**
+     * List of player info matching criteria
+     */
+    playerInfo: PlayerInfo[];
 }
 
 export type Rank = "COMMANDER" | "EXECUTIVE_OFFICER" | "COMBAT_OFFICER" | "PERSONNEL_OFFICER" | "INTELLIGENCE_OFFICER" | "QUARTERMASTER" | "RECRUITMENT_OFFICER" | "JUNIOR_OFFICER" | "PRIVATE" | "RECRUIT" | "RESERVIST";

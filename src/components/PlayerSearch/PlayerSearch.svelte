@@ -2,20 +2,41 @@
     import "../shared.scss";
     import { ApiClient } from "../../lib/api/ApiClient";
     import { onMount } from "svelte";
-    import type { Config, PlayerInfo } from "../../lib/api/clan-tracker-dtos";
+    import type { Config, PlayerSearch } from "../../lib/api/clan-tracker-dtos";
     import { dateDisplayToDate, daysBetween, formatDate } from "../../lib/DisplayLib";
+    import { DetailedFetchError } from "../../lib/exceptions/DetailedFetchError";
+    import { FetchError } from "../../lib/exceptions/FetchError";
 
     let config: Config;
-    let playerInfo: PlayerInfo;
+    let playerSearch: PlayerSearch;
 
     let pageConfig = {
         startDate: "",
         endDate: "",
-        playerName: ""
+        playerSearchInput: ""
+    }
+
+    const fetchPlayerSearch = async () => {
+        const apiClient = new ApiClient();
+        const startDate = dateDisplayToDate(pageConfig.startDate);
+        const endDate = dateDisplayToDate(pageConfig.endDate);
+        try {
+            playerSearch = await apiClient.searchForPlayer(pageConfig.playerSearchInput, startDate, endDate);
+        } catch (e) {
+            if (e instanceof DetailedFetchError) {
+                alert(e.problemDetail.detail)
+            }
+            else if (e instanceof FetchError) {
+                alert(e.message)
+            }
+            else {
+                alert("Error searching for player.")
+            }
+        }
     }
 
     const onSearch = async () => {
-        if (pageConfig.playerName.trim() === "") {
+        if (pageConfig.playerSearchInput.trim() === "") {
             alert("Player name cannot be blank.")
             return;
         }
@@ -24,22 +45,25 @@
             return;
         }
 
-        const apiClient = new ApiClient();
-        const startDate = dateDisplayToDate(pageConfig.startDate);
-        const endDate = dateDisplayToDate(pageConfig.endDate);
-        playerInfo = await apiClient.getPlayerInfo(pageConfig.playerName, startDate, endDate);
-        console.log(playerInfo)
+        await fetchPlayerSearch();
     }
 
     const onDateChange = async () => {
-        if (pageConfig.playerName.trim() === "") {
+        if (pageConfig.playerSearchInput.trim() === "") {
+            return;
+        }
+        if (dateDisplayToDate(pageConfig.startDate) > dateDisplayToDate(pageConfig.endDate)) {
+            alert("Start date must be before end date.")
             return;
         }
 
-        const apiClient = new ApiClient();
-        const startDate = dateDisplayToDate(pageConfig.startDate);
-        const endDate = dateDisplayToDate(pageConfig.endDate);
-        playerInfo = await apiClient.getPlayerInfo(pageConfig.playerName, startDate, endDate);
+        await fetchPlayerSearch();
+    }
+
+    const handleKeyDown = async (event: KeyboardEvent) => {
+        if (event.key === "Enter") {
+            await onSearch();
+        }
     }
 
     onMount(async () => {
@@ -54,7 +78,7 @@
         pageConfig = {
             startDate: formatDate(startDate),
             endDate: formatDate(currentDate),
-            playerName: ""
+            playerSearchInput: ""
         }
     });
 
@@ -80,7 +104,7 @@
         <div class="controls-container">
             <div class="control">
                 <div>Search Player</div>
-                <input class="player-search-input" type="text" bind:value={pageConfig.playerName} placeholder="Zavar"/>
+                <input class="player-search-input" type="text" bind:value={pageConfig.playerSearchInput} placeholder="Zavar" on:keydown={handleKeyDown}/>
                 <button on:click={onSearch}>Search</button>
             </div>
             <div class="control">
@@ -100,7 +124,7 @@
         </div>
     </div>
 
-    {#if playerInfo !== undefined}
+    {#if playerSearch !== undefined}
         <table class="table-container">
             <tr class="table-header">
                 <th class="table-row-header">Name</th>
@@ -111,17 +135,18 @@
                 <th class="table-row-header">Total Clan Battles</th>
             </tr>
 
-            <tr>
-                <td class="table-cell">{playerInfo.name}</td>
-                <td class="table-cell">{playerInfo.randomsDiff}</td>
-                <td class="table-cell">{playerInfo.skirmishDiff}</td>
-                <td class="table-cell">{playerInfo.advancesDiff}</td>
-                <td class="table-cell">{playerInfo.clanWarDiff}</td>
-                <td class="table-cell">{playerInfo.advancesDiff + playerInfo.skirmishDiff + playerInfo.clanWarDiff}</td>
-            </tr>
+            {#each playerSearch.playerInfo as playerInfo}
+                <tr>
+                    <td class="table-cell">{playerInfo.name}</td>
+                    <td class="table-cell">{playerInfo.randomsDiff}</td>
+                    <td class="table-cell">{playerInfo.skirmishDiff}</td>
+                    <td class="table-cell">{playerInfo.advancesDiff}</td>
+                    <td class="table-cell">{playerInfo.clanWarDiff}</td>
+                    <td class="table-cell">{playerInfo.advancesDiff + playerInfo.skirmishDiff + playerInfo.clanWarDiff}</td>
+                </tr>
+            {/each}
         </table>
     {/if}
-
 
 </div>
 

@@ -1,15 +1,26 @@
 
 import { CONFIG } from "../../config";
-import type { ActivityInfo, Clan, Config, PlayerInfo } from "./clan-tracker-dtos";
+import type { ActivityInfo, Clan, Config, PlayerSearch } from "./clan-tracker-dtos";
 import { dateToApiDate } from "../DisplayLib";
+import { FetchError } from "../exceptions/FetchError";
+import { DetailedFetchError } from "../exceptions/DetailedFetchError";
 
 const API_URL = CONFIG.SERVER_URL;
+
+const handleError = async (message: string, response: Response): Promise<FetchError | DetailedFetchError> => {
+    const errorDetail = await response.json();
+    if (errorDetail) {
+        return new DetailedFetchError(message, response, errorDetail);
+    } else {
+        return new FetchError(message, response);
+    }
+};
 
 export class ApiClient {
     async getConfig(): Promise<Config> {
         const response = await fetch(`${API_URL}/data/config`);
         if (!response.ok) {
-            throw new FetchError("Failed to fetch config", response);
+            throw await handleError("Failed to fetch config", response);
         }
         return await response.json() as Config;
     }
@@ -17,7 +28,7 @@ export class ApiClient {
     async getClanList(): Promise<Clan[]> {
         const response = await fetch(`${API_URL}/data/clan-list`);
         if (!response.ok) {
-            throw new FetchError("Failed to fetch clan list", response);
+            throw await handleError("Failed to fetch clan list", response);
         }
         return await response.json() as Clan[];
     }
@@ -29,7 +40,7 @@ export class ApiClient {
         }
         const response = await fetch(requestUrl);
         if (!response.ok) {
-            throw new FetchError("Failed to fetch clan activity", response);
+            throw await handleError("Failed to fetch clan activity", response);
         }
         const activityInfo = await response.json() as ActivityInfo;
 
@@ -44,29 +55,19 @@ export class ApiClient {
         return activityInfo;
     }
 
-    async getPlayerInfo(playerIdOrName: string, startDate: Date, endDate: Date): Promise<PlayerInfo> {
+    async searchForPlayer(playerIdOrName: string, startDate: Date, endDate: Date): Promise<PlayerSearch> {
         let requestUrl = `${API_URL}/data/player-activity/${playerIdOrName}?&startDate=${dateToApiDate(startDate)}&endDate=${dateToApiDate(endDate)}`;
 
         const response = await fetch(requestUrl);
         if (!response.ok) {
-            throw new FetchError("Failed to fetch player activity", response);
+            throw await handleError("Failed to fetch player activity", response);
         }
-        const playerInfo = await response.json() as PlayerInfo;
+        const playerSearch = await response.json() as PlayerSearch;
 
         // Parse date strings to Date objects
-        playerInfo.startDate = new Date(playerInfo.startDate);
-        playerInfo.endDate = new Date(playerInfo.endDate);
+        playerSearch.startDate = new Date(playerSearch.startDate);
+        playerSearch.endDate = new Date(playerSearch.endDate);
 
-        return playerInfo;
-    }
-}
-
-export class FetchError extends Error {
-    response: Response;
-
-    constructor(message: string, response: Response) {
-        super(message);
-        this.name = "FetchError";
-        this.response = response;
+        return playerSearch;
     }
 }
