@@ -1,7 +1,7 @@
 {
   "name": "clan-tracker-ui",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.1.1",
   "type": "module",
   "scripts": {
     "predeploy": "yarn run build",

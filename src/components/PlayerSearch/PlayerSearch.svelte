@@ -104,7 +104,7 @@
         <div class="controls-container">
             <div class="control">
                 <div>Search Player</div>
-                <input class="player-search-input" type="text" bind:value={pageConfig.playerSearchInput} placeholder="Zavar" on:keydown={handleKeyDown}/>
+                <input class="player-search-input" type="text" bind:value={pageConfig.playerSearchInput} placeholder="Name or ID" on:keydown={handleKeyDown}/>
                 <button on:click={onSearch}>Search</button>
             </div>
             <div class="control">
