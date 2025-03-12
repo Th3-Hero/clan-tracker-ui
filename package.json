@@ -23,5 +23,9 @@
     "typescript": "^5.5.3",
     "vite": "^5.4.12",
     "vitest": "^2.1.9"
+  },
+  "resolutions": {
+    "//": "NOTE: vite hasn't updated their esbuild version yet but there is a vulnerability in the current version. This is a workaround until vite updates their esbuild version.",
+    "esbuild": "0.25.0"
   }
 }
