@@ -19,7 +19,7 @@ export const daysBetween = (date1: Date, date2: Date): number => {
 
 export const dateDisplayToDate = (date: string): Date => {
     const [year, month, day] = date.split("-").map(Number);
-    return new Date(year, month - 1, day);
+    return new Date(year, month - 1, day, 23, 59, 59);
 }
 
 export const formatDate = (date: Date, includeTime: boolean = false): string => {

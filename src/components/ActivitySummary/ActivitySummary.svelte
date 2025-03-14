@@ -148,10 +148,6 @@
                     <div>Poor</div>
                     <input type="text" bind:value={pageConfig.poor} placeholder="Poor"/>
                 </div>
-                <div class="control">
-                    <div>Bad</div>
-                    <input type="text" bind:value={pageConfig.bad} placeholder="Bad"/>
-                </div>
             </div>
 
             <div class="control">
