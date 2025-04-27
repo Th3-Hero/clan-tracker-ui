@@ -30,7 +30,6 @@
     let pageConfig = {
         good: 0,
         poor: 0,
-        bad: 0,
         startDate: "",
         endDate: ""
     }
@@ -109,7 +108,6 @@
         pageConfig = {
             good: config.defaultPerformanceThresholdGood,
             poor: config.defaultPerformanceThresholdPoor,
-            bad: config.defaultPerformanceThresholdBad,
             startDate: formatDate(activityInfo.startDate),
             endDate: formatDate(activityInfo.endDate)
         }

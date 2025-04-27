@@ -42,11 +42,15 @@ export class ApiClient {
         if (!response.ok) {
             throw await handleError("Failed to fetch clan activity", response);
         }
-        const activityInfo = await response.json() as ActivityInfo;
+        const activityInfoBody = await response.json();
 
-        // Parse date strings to Date objects
-        activityInfo.startDate = new Date(activityInfo.startDate);
-        activityInfo.endDate = new Date(activityInfo.endDate);
+        const activityInfo: ActivityInfo = {
+            clan: activityInfoBody["clan"],
+            startDate: new Date(`${activityInfoBody["startDate"]}T00:00:00-05:00`),
+            endDate: new Date(`${activityInfoBody["endDate"]}T00:00:00-05:00`),
+            memberActivity: activityInfoBody["memberActivity"]
+        };
+
         activityInfo.memberActivity.forEach(member => {
             member.joinedClan = new Date(member.joinedClan);
             member.lastBattle = new Date(member.lastBattle);

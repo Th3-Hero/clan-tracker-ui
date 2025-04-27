@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2024-10-19 12:20:07.
+// Generated using typescript-generator version 3.2.1263 on 2025-04-27 14:50:45.
 
 /**
  * Information about the activity of a clan.
@@ -46,10 +46,6 @@ export interface Config {
      * Default activity summary range.
      */
     defaultActivitySummaryDateRange: number;
-    /**
-     * Default for what is considered bad performance by a clan member.
-     */
-    defaultPerformanceThresholdBad: number;
     /**
      * Default for what is considered poor performance by a clan member.
      */

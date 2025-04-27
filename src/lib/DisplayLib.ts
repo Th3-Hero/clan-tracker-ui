@@ -19,24 +19,19 @@ export const daysBetween = (date1: Date, date2: Date): number => {
 
 export const dateDisplayToDate = (date: string): Date => {
     const [year, month, day] = date.split("-").map(Number);
-    return new Date(year, month - 1, day, 23, 59, 59);
+    return new Date(year, month - 1, day);
 }
 
-export const formatDate = (date: Date, includeTime: boolean = false): string => {
+export const formatDate = (date: Date): string => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
 
-    if (includeTime) {
-        return `${ year }-${ month }-${ day } ${ hours }:${ minutes }`;
-    }
     return `${ year }-${ month }-${ day }`;
 };
 
 export const dateToApiDate = (date: Date): string => {
-    const formattedDate = formatDate(date, true);
+    const formattedDate = formatDate(date);
     return formattedDate.replace(' ', 'T');
 };
 
