@@ -67,7 +67,7 @@ const rankOrder = [
     "RESERVIST"
 ];
 export const sortMemberActivity = (order: SortOrder, type: SortType, activity: MemberActivity[]): MemberActivity[] => {
-    const getSortKey = (activity: MemberActivity): any => {
+    const getSortKey = (activity: MemberActivity): number | string => {
         switch (type) {
             case SortType.NAME:
                 return activity.name.toLowerCase();

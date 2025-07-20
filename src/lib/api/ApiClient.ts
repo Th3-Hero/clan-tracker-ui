@@ -60,7 +60,7 @@ export class ApiClient {
     }
 
     async searchForPlayer(playerIdOrName: string, startDate: Date, endDate: Date): Promise<PlayerSearch> {
-        let requestUrl = `${API_URL}/data/player-activity/${playerIdOrName}?&startDate=${dateToApiDate(startDate)}&endDate=${dateToApiDate(endDate)}`;
+        const requestUrl = `${API_URL}/data/player-activity/${playerIdOrName}?&startDate=${dateToApiDate(startDate)}&endDate=${dateToApiDate(endDate)}`;
 
         const response = await fetch(requestUrl);
         if (!response.ok) {

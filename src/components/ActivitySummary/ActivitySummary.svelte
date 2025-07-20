@@ -131,7 +131,7 @@
                 <div>Select Clan</div>
                 <select bind:value={selectedClan} on:change={onClanChange}>
                     <option disabled>Select Clan:</option>
-                    {#each clans as clan}
+                    {#each clans as clan (clan)}
                         <option value={clan.id}>{clan.tag}</option>
                     {/each}
                 </select>
@@ -314,7 +314,7 @@
             </th>
         </tr>
 
-        {#each activityInfo.memberActivity as memberActivity}
+        {#each activityInfo.memberActivity as memberActivity (memberActivity.name)}
             <tr class={getPerformanceClass(memberActivity)}>
                 <td class="table-cell">{memberActivity.name}</td>
                 <td class="table-cell">{rankDisplay(memberActivity)}</td>

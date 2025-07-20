@@ -135,7 +135,7 @@
                 <th class="table-row-header">Total Clan Battles</th>
             </tr>
 
-            {#each playerSearch.playerInfo as playerInfo}
+            {#each playerSearch.playerInfo as playerInfo (playerInfo.name)}
                 <tr>
                     <td class="table-cell">{playerInfo.name}</td>
                     <td class="table-cell">{playerInfo.randomsDiff}</td>
