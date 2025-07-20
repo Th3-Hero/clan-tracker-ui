@@ -1,0 +1,16 @@
+name: Validate branch
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  shared-workflows:
+    name: Shared Workflows
+    uses: Th3-Hero/github-workflows-and-actions/.github/workflows/node-validate.yml@main
+    with:
+      node-version: "22"
