@@ -11,6 +11,6 @@ on:
 jobs:
   shared-workflows:
     name: Shared Workflows
-    uses: Th3-Hero/github-workflows-and-actions/.github/workflows/node-validate.yml@main
+    uses: Th3-Hero/github-workflows-and-actions/.github/workflows/yarn-validate.yml@main
     with:
       node-version: "22"
