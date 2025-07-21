@@ -1,0 +1,17 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  shared-workflows:
+    name: Shared Workflows
+    uses: Th3-Hero/github-workflows-and-actions/.github/workflows/yarn-release.yml@main
+    with:
+      cache: "npm"
+      node-version: "22"
+      private-npm-registry: ${{ vars.PRIVATE_NPM_REGISTRY }}
+      scope: "@th3-hero"
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      private-npm-token: ${{ secrets.PRIVATE_NPM_TOKEN }}
