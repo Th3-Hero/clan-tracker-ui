@@ -10,7 +10,7 @@
 </script>
 
 <style lang="scss">
-    @import "./theme";
+    @use "./theme" as *;
 
     .main-container {
         height: 100vh;

@@ -85,7 +85,7 @@
 </script>
 
 <style lang="scss">
-    @import "../../theme";
+    @use "../../theme" as *;
 
     .player-search-input {
         width: 250px;

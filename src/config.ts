@@ -1,3 +1,3 @@
 export const CONFIG = {
-  "SERVER_URL": "https://clan-tracker-api.the-hero.dev",
+  "SERVER_URL": "http://localhost:6002",
 };

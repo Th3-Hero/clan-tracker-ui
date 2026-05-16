@@ -1,4 +1,4 @@
-@import "../../theme";
+@use "../../theme" as *;
 
 $activity-summary-performance-good: hsl(132, 56%, 34%);
 $activity-summary-performance-good-alt: hsl(132, 56%, 40%);
